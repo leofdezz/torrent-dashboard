@@ -2,6 +2,7 @@
 
 import { Torrent } from '@/types/torrent';
 import { Download, Calendar, HardDrive } from 'lucide-react';
+import { formatDate, formatFileSize } from '@/lib/utils';
 
 interface TorrentCardProps {
   torrent: Torrent;
@@ -9,24 +10,6 @@ interface TorrentCardProps {
 }
 
 export default function TorrentCard({ torrent, onDownload }: TorrentCardProps) {
-  const formatFileSize = (bytes: number) => {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-  };
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
-
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden group">
       <div className="p-6">
