@@ -29,13 +29,13 @@ export default function SignIn() {
         setError('Invalid email or password');
       } else {
         const session = await getSession();
-        if (session?.user.role === 'admin') {
+        if (session?.user && 'role' in session.user && session.user.role === 'admin') {
           router.push('/admin');
         } else {
           router.push('/');
         }
       }
-    } catch (err) {
+    } catch {
       setError('An error occurred. Please try again.');
     } finally {
       setLoading(false);
